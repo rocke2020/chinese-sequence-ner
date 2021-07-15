@@ -14,9 +14,9 @@ class BiLSTM(nn.Module):
         # [b,l,emb_size ]
         emb = self.dropout(self.embedding(x))
         # 这里要求输入按长度递减排好序，否则enforce_sorted设置为false,低版本方法有不同之处
-        emb = nn.utils.rnn.pack_padded_sequence(emb,lengths,batch_first=True)
+        emb = nn.utils.rnn.pack_padded_sequence(emb, lengths, batch_first=True)
         emb,_ = self.bilstm(emb)
-        emb,_ = nn.utils.rnn.pad_packed_sequence(emb,batch_first=True,padding_value=0.,total_length=x.shape[1])
+        emb,_ = nn.utils.rnn.pad_packed_sequence(emb, batch_first=True, padding_value=0., total_length=x.shape[1])
         scores = self.fc(emb)
 
         return scores
