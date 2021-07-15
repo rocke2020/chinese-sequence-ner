@@ -4,7 +4,7 @@ import torch.nn.functional as F
 
 from models.BILSTM import BiLSTM,cal_loss
 from models.BILSTM_CRF import BiLSTM_CRF,cal_lstm_crf_loss
-from config import TrainingConfig,LSTMConfig
+from config import TrainingConfig, LSTMConfig
 from utils import sort_by_lengths,tensorized
 
 from copy import deepcopy
@@ -54,11 +54,11 @@ class BiLSTM_operator(object):
         print("训练数据总量:{}".format(len(word_lists)))
 
         batch_size = self.batch_size
-        epoch_iterator = trange(1,self.epoches+1,desc="Epoch")
+        epoch_iterator = trange(1, self.epoches+1, desc="Epoch")
         for epoch in epoch_iterator:
             self.step = 0
             losses = 0.
-            for idx in trange(0,len(word_lists),batch_size,desc="Iteration"):
+            for idx in trange(0, len(word_lists), batch_size,desc="Iteration"):
                 batch_sents = word_lists[idx:idx+batch_size]
                 batch_tags = tag_lists[idx:idx+batch_size]
                 losses += self.train_step(batch_sents,batch_tags,word2id,tag2id)
@@ -160,4 +160,3 @@ class BiLSTM_operator(object):
         tag_lists = [tag_lists[i] for i in indices]
 
         return pred_tag_lists, tag_lists
-
