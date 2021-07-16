@@ -10,7 +10,7 @@ class BiLSTM(nn.Module):
         self.fc = nn.Linear(2*hidden_size,out_size)
         self.dropout = nn.Dropout(dropout)
 
-    def forward(self,x,lengths):
+    def forward(self,x, lengths):  # lengths for pack_padded_sequence
         # [b,l,emb_size ]
         emb = self.dropout(self.embedding(x))
         # 这里要求输入按长度递减排好序，否则enforce_sorted设置为false,低版本方法有不同之处

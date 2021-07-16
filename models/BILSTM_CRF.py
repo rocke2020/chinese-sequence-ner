@@ -17,7 +17,7 @@ class BiLSTM_CRF(nn.Module):
         self.bilstm = BiLSTM(vocab_size,emb_size,hidden_size,out_size)
 
         # CRF实际上就是多学习一个转移矩阵 [out_size, out_size] 初始化为均匀分布
-        self.transition = nn.Parameter(torch.ones(out_size,out_size) * 1 / out_size)
+        self.transition = nn.Parameter(torch.ones(out_size, out_size) * 1 / out_size)
 
     def forward(self,sents_tensor,lengths):
         # B, L, out_size
