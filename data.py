@@ -18,7 +18,7 @@ def build_corpus(split,make_vocab=True,data_dir="./data"):
         tag_list = []
         for line in f:
             if line != '\n':
-                word,tag = line.split()
+                word, tag = line.split()
                 word_list.append(word)
                 tag_list.append(tag)
             else:
